@@ -12,6 +12,8 @@ public class PrimMST {
         this.marked = new boolean[G.V()];
         this.pq = new MinPQ<>(G.E());
 
+        visit(G, 0);
+
         while (!pq.isEmpty() && mst.size() < G.V() - 1) {
             Edge e = pq.deleteMin();
             int v = e.either(); int w = e.other(v);
