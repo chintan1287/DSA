@@ -23,6 +23,7 @@ public class DijkstraSP {
 
         while (pq.size()!= 0) {
             int v = (int)pq.keySet().toArray()[0];
+            pq.remove(v);
             for(WeightedDirectedEdge e : G.adj(v)){
                 relax(e);
             }
@@ -57,6 +58,15 @@ public class DijkstraSP {
             path.push(e);
         }
         return path;
+    }
+
+    public double weight(int v){
+        double result = 0.0;
+
+        for(WeightedDirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]){
+            result += e.weight();
+        }
+        return result;
     }
 
     class ValueComparator implements Comparator {
