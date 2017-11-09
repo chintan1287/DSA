@@ -43,8 +43,8 @@ public class RBT<Key extends Comparable<Key>, Value> {
         else h.value = value;
 
         if(isRed(h.right) && !isRed(h.left)) h = rotateLeft(h);
-        if(isRed(h.left) && !isRed(h.left.left)) h = rotateRight(h);
-        if(isRed(h.left) && !isRed(h.right)) flipColor(h);
+        if(isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
+        if(isRed(h.left) && isRed(h.right)) flipColor(h);
 
         h.count = 1+size(h.left)+size(h.right);
         return h;
