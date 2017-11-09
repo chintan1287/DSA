@@ -11,7 +11,8 @@ public class DepthFirstOrder {
         this.marked = new boolean[G.V()];
         this.reversePost = new Stack<>();
         for (int v=0; v< G.V(); v++) {
-            dfs(G, v);
+            if (!marked[v])
+                dfs(G, v);
         }
     }
 
