@@ -43,7 +43,7 @@ public class Queue<Item> implements Iterable{
 
     @Override
     public Iterator iterator() {
-        return null;
+        return new ListIterator<>(first);
     }
 
     public class ListIterator<Item> implements Iterator<Item>{
