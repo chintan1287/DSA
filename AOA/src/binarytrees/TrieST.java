@@ -1,5 +1,7 @@
 package binarytrees;
 
+import stack.and.queue.Queue;
+
 public class TrieST<Value> {
 
     private static final int R = 256;
@@ -55,5 +57,39 @@ public class TrieST<Value> {
 
         return null;
     }
+
+    public Iterable<String> keys(){
+        Queue<String> queue = new Queue<>();
+        collect(root, "", queue);
+        return queue;
+    }
+
+    private void collect(Node x, String prefix, Queue<String> queue){
+        if(x==null) return;
+        if(x.value!=null) queue.enqueue(prefix);
+        for(char c=0; c<R; c++)
+            collect(x.next[c], prefix+c, queue);
+    }
+
+    public Iterable<String> keysWithPrefix(String prefix){
+        Queue<String> queue = new Queue<>();
+        Node x = get(root, prefix, 0);
+        collect(x, prefix,queue);
+        return queue;
+    }
+
+    public String longestPrefixOf(String query){
+        int length = search(root, query, 0, 0);
+        return query.substring(0, length);
+    }
+
+    private int search(Node x, String query, int d, int length){
+        if(x==null) return length;
+        if(x.value != null) length = d;
+        if(d == query.length()) return length;
+        char c = query.charAt(d);
+        return search(x.next[c], query, d+1, length);
+    }
+
 
 }
